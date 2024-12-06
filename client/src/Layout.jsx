@@ -5,7 +5,7 @@ import MeetRoom from './pages/meetRoom';
 function Layout() {
   return (
     <>
-        <div className="container">
+        <div>
             <header >
                 <Header></Header>
             </header>

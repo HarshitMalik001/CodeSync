@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import Participant from '../components/MeetParticipant/participant';
-import ChatBox from '../components/MeetChatbox/chatbox';
+import Participant from '../components/MeetParticipant/Participant';
+import ChatBox from '../components/MeetChatbox/ChatBox';
 import MeetVideo from '../components/MeetVideo/MeetVideo';
 import MeetVideoControls from '../components/MeetVideo/MeetVideoControls';
 
 function meetRoom() {
+ // for user audio vide of user
+  const [mystream, setMystream] = React.useState(null);
 
   // toggle for chatbox/Participants
   const [selectedButton, setSelectedButton] = useState('chat');
@@ -21,20 +23,19 @@ function meetRoom() {
 
   return (
     <>
-      <div className='h-full w-full bg-slate-700 flex flex-row gap-1 p-1'>
+      <div className='h-screen w-screen bg-slate-700 flex flex-row gap-1 p-1'>
 
 
 
         {/* main */}
-        <div className='border border-white basis-3/4 text-white p-1 '>
-          <div className='p-1 border border-red-800'>
-            <MeetVideo />
+        <div className='basis-3/4 text-white p-1 '>
+          <div className='p-1'>
+            <MeetVideo setMystream={setMystream} userName={'Shoib'} />
+          </div>
+          <div>
+            {mystream && <MeetVideoControls mystream={mystream} />}
           </div>
 
-          <div>
-            <MeetVideoControls/>
-          </div>
-          
         </div>
 
         {/* chat/participats */}

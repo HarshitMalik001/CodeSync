@@ -1,22 +1,18 @@
 import React from 'react';
 import Header from './Header';
-import MeetRoom from './pages/meetRoom';
-import User from './pages/UserPage/Userpage';
-import CompilerPage from './pages/Compiler';
+import { Outlet } from 'react-router-dom';
 
 function Layout() {
   return (
     <>
-        <div>
-            <header >
-                {/* <Header></Header> */}
-            </header>
-            <main  >
-              {/* <User/> */}
-              {/* <CompilerPage/> */}
-                   {/* <MeetRoom/>              */}
-            </main>
-        </div>
+      <div>
+        <header >
+          <Header></Header>
+        </header>
+        <main  >
+          <Outlet />
+        </main>
+      </div>
     </>
   )
 }

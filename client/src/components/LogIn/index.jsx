@@ -1,9 +1,45 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 function Login(props) {
 
     const email = useRef("");
     const password = useRef("");
+    const [message, setMessage] = useState(null);
+    const [messageColor, setMessageColor] = useState("");
+
+    const loginUser = async (loginValues) => {
+        try {
+            console.log(loginValues);
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/users/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(loginValues),
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json(); 
+                console.log(errorData);
+                throw new Error(errorData.data || "Failed to log in user");
+            }
+    
+            const data = await response.json();
+            console.log("User logged in successfully:", data);
+    
+    
+            const { accessToken, refreshToken } = data.data;
+            localStorage.setItem("accessToken", accessToken);
+            localStorage.setItem("refreshToken", refreshToken);
+    
+            return data.data.user;
+        } catch (error) {
+            setMessage(`${ error || "Error: Server"}`);
+            setMessageColor("red");
+            console.error("Login error:", error);
+        }
+    };
+    
 
     const loginSubmitHandler = (event) => {
         event.preventDefault();
@@ -12,8 +48,12 @@ function Login(props) {
             email: email.current.value,
             password: password.current.value,
         };
+        loginUser(formValuesObject);
 
+        // setMessage("Error: Passwords do not match.");
+        // setMessageColor("red");
         console.log(formValuesObject);
+
     }
 
     return (
@@ -22,6 +62,20 @@ function Login(props) {
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                            {/* Message Block */}
+                            {message && (
+                                <div
+                                    className={`p-4 mb-4 text-sm rounded-lg border`}
+                                    style={{
+                                        backgroundColor: messageColor === "green" ? "#eafaf1" : "#fbeaea",
+                                        color: messageColor === "green" ? "#064e3b" : "#7f1d1d",
+                                        borderColor: messageColor === "green" ? "#d1fae5" : "#fecaca",
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    {message}
+                                </div>
+                            )}
                             <div className="mb-6 flex space-x-8 justify-center">
                                 <button
                                     onClick={props.Register}
@@ -99,7 +153,7 @@ function Login(props) {
                                     type="submit"
                                     className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                                 >
-                                    Create an account
+                                    Login To CodeSync
                                 </button>
                             </form>
                         </div>

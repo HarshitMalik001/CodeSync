@@ -1,7 +1,11 @@
 import { React, useState } from 'react';
 import { v4 as uuidV } from 'uuid';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 function JoinRoom() {
+
+    const navigate = useNavigate();
 
     const [roomId, setRoomId] = useState('');
     const [userName, setuserName] = useState('');
@@ -12,9 +16,22 @@ function JoinRoom() {
         setRoomId(id);
     }
 
-    const joinRoom = () => {
-        // join room logic
-        console.log("Joining room soon");
+    const join = (e) => {
+        e.preventDefault(); 
+
+        if (!roomId || !userName) {
+            toast.error("RoomId & Username required !");
+            console.log("RoomId or Username is missing");
+            return;
+        }
+
+        // If both fields are valid
+        console.log("Joining room with RoomId:", roomId, "and Username:", userName);
+        navigate(`/meet-room/${roomId}`, {
+            state: {
+                userName,
+            },
+        })
     }
 
     return (
@@ -26,17 +43,17 @@ function JoinRoom() {
                         type="text"
                         placeholder='Room Id'
                         className='h-10 text-center'
-                        onChange={(e) => {setRoomId(e.target.value)}}
+                        onChange={(e) => { setRoomId(e.target.value) }}
                         value={roomId} />
                     <input
                         type="text"
                         placeholder='Username'
                         className='h-10 text-center'
-                        onChange={(e) => {setuserName(e.target.value)}}
+                        onChange={(e) => { setuserName(e.target.value) }}
                         value={userName} />
                 </div>
                 <div className='flex flex-col gap-3'>
-                    <button onClick={joinRoom} className='p-2 bg-green-500 w-full'>Join</button>
+                    <button onClick={join} className='p-2 bg-green-500 w-full'>Join</button>
                     <button onClick={newRoom} className='p-2 bg-blue-500 w-full'>New</button>
                 </div>
             </div>
@@ -44,4 +61,4 @@ function JoinRoom() {
     )
 }
 
-export default JoinRoom
+export default JoinRoom;

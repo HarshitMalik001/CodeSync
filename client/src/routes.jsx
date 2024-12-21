@@ -1,4 +1,4 @@
-import Layout from "./Layout";
+import Layout from "./Layout/Layout";
 import User from "./pages/UserPage/Userpage";
 import JoinRoom from "./pages/JoinRoom";
 import MeetRoom from "./pages/MeetRoom";

@@ -5,7 +5,7 @@ import IconVideo from '../../icons/video/IconVideo';
 import IconVideoOff from '../../icons/video/IconVideoOff';
 import IconScreen from '../../icons/IconScreenShare';
 
-function MeetVideoControls({ mystream }) {
+function MeetVideoControls({ mystream, setMystream }) {
   const [isMicOn, setMicOn] = useState(true);
   const [isVideoOn, setVideoOn] = useState(true);
   const [isScreenSharing, setScreenSharing] = useState(false);
@@ -16,19 +16,33 @@ function MeetVideoControls({ mystream }) {
       if (audioTrack) {
         audioTrack.enabled = !audioTrack.enabled;
         setMicOn(audioTrack.enabled);
+  
+        const updatedStream = new MediaStream([
+          ...mystream.getAudioTracks(),
+          ...mystream.getVideoTracks(),
+        ]);
+        setMystream(updatedStream);
       }
     }
   };
 
+ 
   const toggleVideo = () => {
     if (mystream) {
       const videoTrack = mystream.getTracks().find((track) => track.kind === "video");
       if (videoTrack) {
         videoTrack.enabled = !videoTrack.enabled;
         setVideoOn(videoTrack.enabled);
+  
+        const updatedStream = new MediaStream([
+          ...mystream.getAudioTracks(),
+          ...mystream.getVideoTracks(),
+        ]);
+        setMystream(updatedStream);
       }
     }
   };
+  
 
   const toggleScreenSharing = () => {
     setScreenSharing(!isScreenSharing);

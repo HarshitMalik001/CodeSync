@@ -1,12 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect } from 'react'
 import Participant from '../components/MeetParticipant/Participant';
 import ChatBox from '../components/MeetChatbox/ChatBox';
 import MeetVideo from '../components/MeetVideo/MeetVideo';
 import MeetVideoControls from '../components/MeetVideo/MeetVideoControls';
 
 function meetRoom() {
- // for user audio vide of user
-  const [mystream, setMystream] = React.useState(null);
+
+  const [participants, setParticipants] = useState([
+    { socketId: 1, username: 'Sulammita', status: 'online', userStream: null },
+    { socketId: 2, username: 'Dennis Ivy', status: 'offline', userStream: null },
+    { socketId: 2, username: 'Dennis Ivy', status: 'offline', userStream: null },
+    { socketId: 2, username: 'Dennis Ivy', status: 'offline', userStream: null },
+    { socketId: 2, username: 'Dennis Ivy', status: 'offline', userStream: null },
+    { socketId: 2, username: 'Dennis Ivy', status: 'offline', userStream: null },
+    { socketId: 2, username: 'Dennis Ivy', status: 'offline', userStream: null },
+    { socketId: 2, username: 'Dennis Ivy', status: 'offline', userStream: null },
+    { socketId: 2, username: 'Dennis Ivy', status: 'offline', userStream: null },
+    { socketId: 2, username: 'Dennis Ivy', status: 'offline', userStream: null },
+    { socketId: 2, username: 'Dennis Ivy', status: 'offline', userStream: null },
+    { socketId: 2, username: 'Dennis Ivy', status: 'offline', userStream: null },
+    { socketId: 2, username: 'Dennis Ivy', status: 'offline', userStream: null },
+    { socketId: 2, username: 'Dennis Ivy', status: 'offline', userStream: null },
+    { socketId: 2, username: 'Dennis Ivy', status: 'offline', userStream: null },
+    { socketId: 2, username: 'Dennis Ivy', status: 'offline', userStream: null },
+  ]);
+
+
+  useEffect(() => {
+    //when new user joins updates it
+
+  }, [participants]);
+
+  // for user audio vide of user
+  const [mystream, setMystream] = useState(null);
 
   // toggle for chatbox/Participants
   const [selectedButton, setSelectedButton] = useState('chat');
@@ -30,10 +56,10 @@ function meetRoom() {
         {/* main */}
         <div className='basis-3/4 text-white p-1 '>
           <div className='p-1'>
-            <MeetVideo setMystream={setMystream} userName={'Shoib'} />
+            <MeetVideo setMystream={setMystream} userName={'Shoib'} participants={participants} />
           </div>
           <div>
-            {mystream && <MeetVideoControls mystream={mystream} />}
+            {mystream && <MeetVideoControls mystream={mystream} setMystream={setMystream} />}
           </div>
 
         </div>
@@ -63,7 +89,7 @@ function meetRoom() {
 
           {/* view for participants/chat */}
           <div className='p-1 m-1'>
-            {selectedButton === 'participant' ? <Participant /> : <ChatBox />}
+            {selectedButton === 'participant' ? <Participant participants={participants} /> : <ChatBox />}
           </div>
         </div>
       </div>

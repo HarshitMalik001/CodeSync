@@ -1,20 +1,22 @@
 import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 function Login(props) {
-
     const email = useRef("");
     const password = useRef("");
     const [message, setMessage] = useState(null);
     const [messageColor, setMessageColor] = useState("");
+    const navigate = useNavigate();
 
     const loginUser = async (loginValues) => {
         try {
-            console.log(loginValues);
             const response = await fetch(`${import.meta.env.VITE_API_URL}/users/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
+                credentials: "include", 
                 body: JSON.stringify(loginValues),
             });
     
@@ -31,6 +33,11 @@ function Login(props) {
             const { accessToken, refreshToken } = data.data;
             localStorage.setItem("accessToken", accessToken);
             localStorage.setItem("refreshToken", refreshToken);
+            localStorage.setItem("isLoggedIn", 1);
+            localStorage.setItem("userDetails", JSON.stringify(data.data.user));
+            
+            console.log(data.data.user);
+            navigate("/meet-room");
     
             return data.data.user;
         } catch (error) {
@@ -52,8 +59,6 @@ function Login(props) {
 
         // setMessage("Error: Passwords do not match.");
         // setMessageColor("red");
-        console.log(formValuesObject);
-
     }
 
     return (

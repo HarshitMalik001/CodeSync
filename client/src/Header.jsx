@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useRef, useState } from "react";
 import logo from './images/logo.png';
 import IconHome from './icons/IconHome';
 import IconCreate from './icons/IconCreate';
 import IconMenuUnfold from './icons/IconMenuUnFold';
+import IconUser from './icons/IconUser';
+import IconLogout from './icons/IconLogout';
+import { isUserLoggedIn } from './utils/helper';
 
 const Header = () => {
+    const [isLoggedIn, setisLoggedIn] = useState(isUserLoggedIn());
     return (
         <header className="bg-gray-900 text-white flex justify-between items-center border-b border-black py-2 px-5 md:px-10 lg:px-16">
             <div className="flex gap-4 items-center">
@@ -26,14 +30,22 @@ const Header = () => {
             <div className="hidden lg:flex items-center gap-8">
                 {/* Lobby Link */}
                 <button className="hover:text-red-400 transition-all duration-300 ease-in-out pb-1 border-b-2 border-transparent flex justify-center items-center gap-2">
-                    Lobby
-                    <IconHome className="h-6 w-6" />
+                    {isLoggedIn? (
+                        JSON.parse(localStorage.getItem("userDetails")).fullname
+                    ): (
+                        "User"
+                    )}
+                    <IconUser className="h-6 w-6" />
                 </button>
 
                 {/* Create Room Button */}
                 <button className="hover:text-red-400 transition-all duration-300 ease-in-out pb-1 border-b-2 border-transparent flex justify-center items-center gap-2">
-                    Create Room
-                    <IconCreate className="h-6 w-6" />
+                    {isLoggedIn? (
+                        "Logout"
+                    ): (
+                        "Login"
+                    )}
+                    <IconLogout className="h-6 w-6" />
                 </button>
             </div>
 

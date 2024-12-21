@@ -71,9 +71,6 @@ const registerUser = asyncHandler(async (req, res) => {
 })
 
 const loginUser = asyncHandler( async (req, res) =>{
-    // check user exist
-    // check if correct password 
-    // create token
 
     const {username, email, password} = req.body;
 
@@ -110,10 +107,15 @@ const loginUser = asyncHandler( async (req, res) =>{
     const {accessToken, refreshToken} = await generateAccessAndRefreshTokens(user._id);
     const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
 
+    // const options = {
+    //     httpOnly: true,
+    //     secure: true
+    // }
     const options = {
-        httpOnly: true,
-        secure: true
-    }
+        httpOnly: true,     
+        secure: true,
+        sameSite: "None",    
+    };
 
     res.status(200)
     .cookie("accessToken", accessToken, options)

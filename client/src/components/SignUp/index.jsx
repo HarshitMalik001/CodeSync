@@ -9,7 +9,34 @@ function Signup(props) {
   const [message, setMessage] = useState(null);
   const [messageColor, setMessageColor] = useState("");
 
-  const signupSubmitHandler = (event) => {
+
+  const registerUser = async (formValuesObject) => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/register`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formValuesObject),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json(); 
+            throw new Error(errorData.data || "Failed to register user");
+        }
+
+        const data = await response.json(); 
+        setMessage("User Registered Succesfully");
+        setMessageColor("green");
+    } catch (error) {
+        setMessage(`${error || "Error From Server Side"}`);
+        setMessageColor("red");
+        console.error("Registration error:", error);
+    }
+};
+
+
+  const signupSubmitHandler = async (event) => {
     event.preventDefault();
 
     const formValuesObject = {
@@ -38,10 +65,8 @@ function Signup(props) {
       return;
     }
 
-    setMessage("User registered successfully!");
-    setMessageColor("green");
+    registerUser(formValuesObject);
 
-    console.log(formValuesObject);
   };
 
   return (

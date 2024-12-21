@@ -8,5 +8,4 @@ export const logout = () => {
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userDetails");
-    window.location.reload();
   };

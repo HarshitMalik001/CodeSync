@@ -11,7 +11,7 @@ export const routes = [
         children: [
             {
                 path: "/",
-                element: <User />, // Home page, renders User component
+                element: <User/>, // Home page, renders User component
             },
             {
                 path: "/meet-room", // JoinRoom page, rendered under /user/meet-room

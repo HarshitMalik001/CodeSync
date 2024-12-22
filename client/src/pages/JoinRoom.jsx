@@ -25,7 +25,6 @@ function JoinRoom() {
             return;
         }
 
-        // If both fields are valid
         console.log("Joining room with RoomId:", roomId, "and Username:", userName);
         navigate(`/meet-room/${roomId}`, {
             state: {

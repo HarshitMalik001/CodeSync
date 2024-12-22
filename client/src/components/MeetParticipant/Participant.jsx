@@ -4,8 +4,6 @@ import UserAv from '../userAvatar/UserAv';
 
 function Participant({participants}) {  
 
-  console.log(participants);
-
   return (
     <div className='h-[80vh] bg-gray-800 overflow-y-auto border border-gray-600 rounded-xl'>
       <div className=" w-full p-4">
@@ -13,7 +11,7 @@ function Participant({participants}) {
           {
             participants.map((user) => {
               return (
-                <UserAv key={user.socketId}  username={user.name} status={user.status}  />
+                <UserAv key={user.socketId}  username={user.username} status={true}  />
               )
             })
           }
@@ -23,4 +21,4 @@ function Participant({participants}) {
   )
 }
 
-export default Participant
+export default Participant;

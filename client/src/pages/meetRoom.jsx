@@ -2,22 +2,21 @@ import React, { useState, useEffect, useRef } from 'react'
 import Participant from '../components/MeetParticipant/Participant';
 import ChatBox from '../components/MeetChatbox/ChatBox';
 import MeetVideoControls from '../components/MeetVideo/MeetVideoControls';
-import VideoAud from '../components/userVidAd/VideoAud';
 import { initSocket } from '../socket';
 import { useLocation, useNavigate, Navigate, useParams } from 'react-router-dom';
 import ACTIONS from '../Action'
 import toast from 'react-hot-toast';
+import Avatar from 'react-avatar';
 
 function meetRoom() {
 
   const socketRef = useRef(null);
-  const myvideo = useRef(null);
   const location = useLocation();
   const { roomId } = useParams();
   const reactNavigator = useNavigate();
 
-
-  const [messages, setMessages] = useState([]); 
+  const [videoEnabled, setVideoEnabled] = useState(null);
+  const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [mystream, setMystream] = useState(null);
   const [selectedButton, setSelectedButton] = useState('chat');
@@ -52,7 +51,6 @@ function meetRoom() {
       socketRef.current.on(ACTIONS.JOINED, ({ clients, username, socketId }) => {
         if (username !== location.state.userName) {
           toast.success(`${username} joined room`);
-          console.log(`${username} joined`);
         }
         setParticipants(clients);
       });
@@ -64,8 +62,6 @@ function meetRoom() {
           return prev.filter(client => client.socketId !== socketId);
         });
       });
-
-      //
 
       // Listen for 'CHAT_MESSAGE' event 
       socketRef.current.on(ACTIONS.CHAT_MESSAGE, (message) => {
@@ -90,12 +86,10 @@ function meetRoom() {
     return <Navigate to='/' />
   }
 
-  
-
   const handleSendMessage = () => {
     if (newMessage.trim()) {
       const message = {
-        username: location.state?.userName, // Use actual username
+        username: location.state?.userName,
         text: newMessage,
         time: new Date().toLocaleTimeString(),
       };
@@ -109,28 +103,9 @@ function meetRoom() {
     }
   };
 
-
-
-  // Toggle selected view (Chat or Participant)
   const handleButtonClick = (buttonId) => {
     setSelectedButton(buttonId === selectedButton ? null : buttonId);
   };
-
-  // useEffect(() => {
-  //   navigator.mediaDevices
-  //     .getUserMedia({ video: true, audio: true })
-  //     .then((stream) => {
-  //       if (myvideo.current) {
-  //         myvideo.current.srcObject = stream;
-  //         myvideo.current.autoplay = true;
-  //         myvideo.current.muted = false;
-  //       }
-  //       setMystream(stream);
-  //     })
-  //     .catch((err) => {
-  //       console.error("Error accessing media devices", err);
-  //     });
-  // }, [setMystream]);
 
 
   return (
@@ -142,11 +117,15 @@ function meetRoom() {
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-2 ">
                 {participants.map((participant) => {
                   return (
-                    <VideoAud
-                      key={participant.socketId}
-                      userName={participant.username}
-                      stream={participant.userStream}
-                    />
+                    <div className="relative w-full h-0 border" style={{ paddingTop: "56.25%" }}>
+                      {/* If video is on, show the video element */}
+                      <div className="absolute top-0 left-0 w-full h-full transform scale-x-[1] object-cover">
+                        <Avatar name={participant.username} size="100%" />
+                      </div>
+                      <div className="absolute bottom-2 left-2 text-white">
+                        <span className="font-semibold text-lg">{participant.username}</span>
+                      </div>
+                    </div>
                   )
                 })}
               </div>

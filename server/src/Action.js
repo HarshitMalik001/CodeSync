@@ -6,7 +6,9 @@ const ACTIONS = {
     SYNC_CODE: 'sync-code',
     LEAVE: 'leave',
     CHAT_MESSAGE: 'chat-message',
-    NEW_PARTICIPANT: 'new-participant',
+    MIC_TOGGLE: 'mic-toggle', 
+    CAMERA_TOGGLE: 'camera-toggle', 
+    MEDIA_PERMISSIONS: 'media-permission',
 };
 
 export default ACTIONS;

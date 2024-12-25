@@ -5,6 +5,7 @@ import app from "./app.js";
 import http from "http";
 import { Server } from "socket.io";
 import ACTIONS from "./Action.js";
+import { log } from "console";
 
 dotenv.config({
     path: './.env'
@@ -50,6 +51,13 @@ connectDB()
                     });
                 });
             });
+
+            // handle colabrative compiler
+            socket.on(ACTIONS.CODE_CHANGE, ({ roomId, newCode }) => {
+                socket.in(roomId).emit(ACTIONS.CODE_CHANGE, { code: newCode });
+            });
+            
+            // syn_code for new user
 
             // Handle disconnecting event
             socket.on('disconnecting', () => {

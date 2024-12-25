@@ -7,7 +7,7 @@ import IconScreen from '../../icons/IconScreenShare';
 import CompilerPage from '../../pages/Compiler/index';
 import IconEndMeet from '../../icons/IconEndMeet';
 
-function MeetVideoControls({ mystream, setMystream }) {
+function MeetVideoControls({ mystream, setMystream, socketRef, roomId, reactNavigator }) {
   const [isMicOn, setMicOn] = useState(true);
   const [isVideoOn, setVideoOn] = useState(true);
   const [isCompiler, setCompiler] = useState(false);
@@ -19,7 +19,7 @@ function MeetVideoControls({ mystream, setMystream }) {
       if (audioTrack) {
         audioTrack.enabled = !audioTrack.enabled;
         setMicOn(audioTrack.enabled);
-  
+
         const updatedStream = new MediaStream([
           ...mystream.getAudioTracks(),
           ...mystream.getVideoTracks(),
@@ -35,7 +35,7 @@ function MeetVideoControls({ mystream, setMystream }) {
       if (videoTrack) {
         videoTrack.enabled = !videoTrack.enabled;
         setVideoOn(videoTrack.enabled);
-  
+
         const updatedStream = new MediaStream([
           ...mystream.getAudioTracks(),
           ...mystream.getVideoTracks(),
@@ -44,11 +44,15 @@ function MeetVideoControls({ mystream, setMystream }) {
       }
     }
   };
-  
+
   const toggleScreenSharing = () => {
     setCompiler(!isCompiler);
     setIsCompilerVisible(!isCompilerVisible);
   };
+
+  const endCall = () => {
+    reactNavigator('/meet-room');
+  }
 
   return (
     <div className="flex space-x-4 justify-center items-center p-1">
@@ -75,14 +79,15 @@ function MeetVideoControls({ mystream, setMystream }) {
       >
         <IconScreen />
       </button>
-      {isCompilerVisible && <CompilerPage/>}
+      {isCompilerVisible && <CompilerPage socketRef={socketRef} roomId={roomId} />}
 
       <button
         className={'px-4 py-2 rounded-full text-white font-semibold focus:outline-none bg-red-600'}
+        onClick={endCall}
       >
-        <IconEndMeet/>
+        <IconEndMeet />
       </button>
-      
+
     </div>
   );
 }

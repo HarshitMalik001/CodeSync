@@ -1,11 +1,11 @@
-import * as React from "react";
+import React from "react";
 
-function IconCreate(props) {
+const IconCreate = (props) => {
   return (
     <svg
       viewBox="0 0 21 21"
       fill="currentColor"
-      {...props}
+      {...props} // Spread the props to allow customization
     >
       <g
         fill="none"
@@ -19,6 +19,7 @@ function IconCreate(props) {
       </g>
     </svg>
   );
-}
+};
 
 export default IconCreate;
+

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import Editor from "@monaco-editor/react";
+import React, { useState, useEffect, useRef } from "react";
 import codeSnippets from "../../components/codeSnippets";
+import ACTIONS from "../../Action";
 
 // Function to create a submission
 const createSubmission = async (languageId, code, input) => {
@@ -50,12 +50,13 @@ const getSubmission = async (token) => {
   }
 };
 
-const CompilerPage = () => {
-  const [code, setCode] = useState("");
+const CompilerPage = ({ socketRef, roomId, onCodeChange }) => {
   const [language, setLanguage] = useState("javascript");
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [code, setCode] = useState(codeSnippets[language]);
+  const editorRef = useRef(null);
 
   const compileCode = async () => {
     setLoading(true);
@@ -96,7 +97,6 @@ const CompilerPage = () => {
     }
   };
 
-
   const handleKeyDown = (e) => {
     if (e.key === "Tab") {
       e.preventDefault();
@@ -104,10 +104,10 @@ const CompilerPage = () => {
       const end = e.target.selectionEnd;
 
       // Insert 4 spaces
-      setCode(
-        (prevCode) =>
-          prevCode.substring(0, start) + "    " + prevCode.substring(end)
-      );
+      // setCode(
+      //   (prevCode) =>
+      //     prevCode.substring(0, start) + "    " + prevCode.substring(end)
+      // );
       // Move the cursor
       setTimeout(() => {
         e.target.selectionStart = e.target.selectionEnd = start + 4;
@@ -144,26 +144,55 @@ const CompilerPage = () => {
     }
   };
 
-  useEffect(()=>{
-    setCode(codeSnippets[language])   
-  },[language]);
+
+  useEffect(() => {
+    setCode(codeSnippets[language]);
+  }, [language]);
+
+  const myChange = (e) => {
+    const newCode = e.target.value;
+    setCode(newCode);
+    if (socketRef.current) {
+      socketRef.current.emit(ACTIONS.CODE_CHANGE, { roomId, newCode });
+    }
+  }
+
+
+  useEffect(() => {
+    if (socketRef.current) {
+      socketRef.current.on(ACTIONS.CODE_CHANGE, (codeRec) => {
+        if (code !== codeRec.code) {
+          setCode(codeRec.code);
+        }
+      });
+      return () => {
+        socketRef.current.off(ACTIONS.CODE_CHANGE);
+      };
+    }
+  }, [code]);
+
+
+
 
 
   return (
+
     <div className="absolute top-10 left-28 rounded-xl flex h-[80vh] w-[80vw] bg-gray-900 text-white">
 
       {/* Left Section: Code Editor */}
+
       <div className="w-2/3 p-6">
-        <Editor
-          height="100%"
-          width="100%"
-          theme="vs-dark"
-          language={language}
-          defaultLanguage= {codeSnippets[language]}
+
+        <textarea
+          id="code"
+          ref={editorRef}
           value={code}
-          onChange={(e) => setCode(e)}
-          onKeyDown={handleKeyDown}
-        />
+          onChange={myChange}
+          onKeyDown={handleKeyDown} rows="10"
+          className="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-600 focus:outline-none mb-4"
+          placeholder="Write your code here..."
+        ></textarea>
+
       </div>
 
       {/* Right Section: Language Selector, Compile Button, Input, Output */}

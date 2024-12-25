@@ -4,11 +4,14 @@ import IconMicOff from '../../icons/microphone/IconMicOff';
 import IconVideo from '../../icons/video/IconVideo';
 import IconVideoOff from '../../icons/video/IconVideoOff';
 import IconScreen from '../../icons/IconScreenShare';
+import CompilerPage from '../../pages/Compiler/index';
+import IconEndMeet from '../../icons/IconEndMeet';
 
 function MeetVideoControls({ mystream, setMystream }) {
   const [isMicOn, setMicOn] = useState(true);
   const [isVideoOn, setVideoOn] = useState(true);
-  const [isScreenSharing, setScreenSharing] = useState(false);
+  const [isCompiler, setCompiler] = useState(false);
+  const [isCompilerVisible, setIsCompilerVisible] = useState(false);
 
   const toggleMic = () => {
     if (mystream) {
@@ -26,7 +29,6 @@ function MeetVideoControls({ mystream, setMystream }) {
     }
   };
 
- 
   const toggleVideo = () => {
     if (mystream) {
       const videoTrack = mystream.getTracks().find((track) => track.kind === "video");
@@ -43,9 +45,9 @@ function MeetVideoControls({ mystream, setMystream }) {
     }
   };
   
-
   const toggleScreenSharing = () => {
-    setScreenSharing(!isScreenSharing);
+    setCompiler(!isCompiler);
+    setIsCompilerVisible(!isCompilerVisible);
   };
 
   return (
@@ -69,10 +71,18 @@ function MeetVideoControls({ mystream, setMystream }) {
       {/* Screen Sharing button */}
       <button
         onClick={toggleScreenSharing}
-        className={`px-4 py-2 rounded-full text-white font-semibold focus:outline-none ${isScreenSharing ? 'bg-blue-500' : 'bg-gray-500'}`}
+        className={`px-4 py-2 rounded-full text-white font-semibold focus:outline-none ${isCompiler ? 'bg-blue-500' : 'bg-gray-500'}`}
       >
         <IconScreen />
       </button>
+      {isCompilerVisible && <CompilerPage/>}
+
+      <button
+        className={'px-4 py-2 rounded-full text-white font-semibold focus:outline-none bg-red-600'}
+      >
+        <IconEndMeet/>
+      </button>
+      
     </div>
   );
 }

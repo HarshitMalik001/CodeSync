@@ -110,7 +110,7 @@ function meetRoom() {
 
   return (
     <>
-      <div className='h-screen w-screen bg-slate-700 flex flex-row gap-1 p-1'>
+      <div className='relative h-screen w-screen bg-slate-700 flex flex-row gap-1 p-1'>
         <div className='basis-3/4 text-white p-1 '>
           <div className='p-1'>
             <div className="h-[86vh] w-full p-1 bg-gray-950 overflow-scroll">

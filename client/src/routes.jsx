@@ -1,8 +1,7 @@
 import Layout from "./Layout/Layout";
 import User from "./pages/UserPage/Userpage";
 import JoinRoom from "./pages/JoinRoom";
-import MeetRoom from "./pages/MeetRoom";
-import CompilerPage from "./pages/Compiler";
+import MeetRoom from "./pages/meetRoom";
 
 export const routes = [
     {
@@ -20,10 +19,6 @@ export const routes = [
             {
                 path: "/meet-room/:roomid", // MeetRoom page, with dynamic roomid, rendered under /user/meet-room/:roomid
                 element: <MeetRoom />,
-            },
-            {
-                path: "/compiler", // JoinRoom page, rendered under /user/meet-room
-                element: <CompilerPage />,
             },
         ],
     },

@@ -15,16 +15,11 @@ function meetRoom() {
   const { roomId } = useParams();
   const reactNavigator = useNavigate();
 
-  const [videoEnabled, setVideoEnabled] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [mystream, setMystream] = useState(null);
   const [selectedButton, setSelectedButton] = useState('chat');
   const [participants, setParticipants] = useState([]);
-
-  useEffect(() => {
-    console.log('Message state : ', messages);
-  }, [messages]);
 
   //socket
   useEffect(() => {
@@ -110,14 +105,14 @@ function meetRoom() {
 
   return (
     <>
-      <div className='h-screen w-screen bg-slate-700 flex flex-row gap-1 p-1'>
+      <div className='relative h-screen w-screen bg-slate-700 flex flex-row gap-1 p-1'>
         <div className='basis-3/4 text-white p-1 '>
           <div className='p-1'>
             <div className="h-[86vh] w-full p-1 bg-gray-950 overflow-scroll">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-2 ">
                 {participants.map((participant) => {
                   return (
-                    <div className="relative w-full h-0 border" style={{ paddingTop: "56.25%" }}>
+                    <div key={participant.socketId} className="relative w-full h-0 border" style={{ paddingTop: "56.25%" }}>
                       {/* If video is on, show the video element */}
                       <div className="absolute top-0 left-0 w-full h-full transform scale-x-[1] object-cover">
                         <Avatar name={participant.username} size="100%" />
@@ -126,13 +121,13 @@ function meetRoom() {
                         <span className="font-semibold text-lg">{participant.username}</span>
                       </div>
                     </div>
-                  )
+                  );
                 })}
               </div>
             </div>
           </div>
           <div>
-            {<MeetVideoControls mystream={mystream} setMystream={setMystream} />}
+            {<MeetVideoControls mystream={mystream} setMystream={setMystream} socketRef={socketRef} roomId={roomId} reactNavigator={reactNavigator} />}
           </div>
 
         </div>
@@ -148,7 +143,7 @@ function meetRoom() {
 
             {/* Participant Button */}
             <button
-              onClick={() => handleButtonClick('participant')}
+              onClick={() => handleButtonClick('xparticipant')}
               className={`border border-black p-2 rounded-tr-lg rounded-br-lg transition-all duration-300 ease-in-out ${selectedButton === 'participant' ? 'bg-blue-500 text-white' : 'bg-white text-black'
                 }`}
             >

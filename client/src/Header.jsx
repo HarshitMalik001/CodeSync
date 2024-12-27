@@ -8,6 +8,7 @@ import IconLogout from './icons/IconLogout';
 import { isUserLoggedIn, logout } from './utils/helper';
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import IconLogin from "./icons/IconLogin";
 
 const logoutAPI = async () => {
     try {
@@ -16,7 +17,7 @@ const logoutAPI = async () => {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include", // Ensures cookies are sent
+        credentials: "include",
       });
   
       if (!response.ok) {
@@ -55,7 +56,7 @@ const Header = () => {
                 <button className="flex items-center gap-4">
                     <h3 className="flex items-center gap-4 text-2xl font-bold">
                         <img src={logo} alt="Logo" className="h-10" />
-                        <span>Mumble</span>
+                        <span>CodeMeet</span>
                     </h3>
                 </button>
             </div>
@@ -81,11 +82,12 @@ const Header = () => {
                     {isLoggedIn? (
                         <button className="hover:text-red-400 transition-all duration-300 ease-in-out pb-1 border-b-2 border-transparent flex justify-center items-center gap-2" onClick={logoutHandler}>
                         Logout
-                        <IconLogout className="h-6 w-6" /> </button>
+                        <IconLogout/> </button>
                     ): (
                         <button className="hover:text-red-400 transition-all duration-300 ease-in-out pb-1 border-b-2 border-transparent flex justify-center items-center gap-2">
-                        Login
-                        <IconLogout className="h-6 w-6" /></button>
+                        LogIn   
+                        <IconLogin/>
+                        </button>
                     )}
                     
             </div>

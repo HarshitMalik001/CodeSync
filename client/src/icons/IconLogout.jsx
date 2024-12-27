@@ -1,16 +1,19 @@
 import * as React from "react";
 
 function IconLogout(props) {
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
-        </svg>
-
-    );
+  return (
+    <svg fill="none" viewBox="0 0 15 15" height="1.5em" width="1.5em" {...props}>
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M1 1h7v1H2v11h6v1H1V1zm9.854 3.146l3.34 3.34-3.327 3.603-.734-.678L12.358 8H4V7h8.293l-2.147-2.146.708-.708z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
 }
 
-
-
 export default IconLogout;
+
 
 

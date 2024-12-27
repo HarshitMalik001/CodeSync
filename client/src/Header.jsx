@@ -39,7 +39,8 @@ const Header = () => {
 
     useEffect(() => {
         setisLoggedIn(isUserLoggedIn());
-      }, [location]);
+    }, [location]);
+
 
     function logoutHandler(){
         logout();

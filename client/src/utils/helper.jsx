@@ -1,6 +1,6 @@
 export const isUserLoggedIn = () => {
-    let loggedInUserEmail = localStorage.getItem("isLoggedIn");
-    return loggedInUserEmail ? true : false;
+    let loggedInUser = localStorage.getItem("isLoggedIn");
+    return loggedInUser ? true : false;
   };
   
 export const logout = () => {

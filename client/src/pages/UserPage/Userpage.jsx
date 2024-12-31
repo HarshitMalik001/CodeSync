@@ -1,8 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Signup from '../../components/SignUp';
 import Login from '../../components/LogIn';
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export function User() {
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    function checkLoggedIn(){
+        console.log(localStorage.getItem("isLoggedIn") === "1");
+        if(localStorage.getItem("isLoggedIn") === "1")
+        {
+            navigate("/meet-room")
+        }
+    }
+    
+    useEffect(() => {
+        checkLoggedIn();
+    }, [location]);
+
     const [flagSignup, setFlagSignup] = useState(1);
 
     const Register = () => setFlagSignup(0);

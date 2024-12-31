@@ -7,6 +7,8 @@ import { useLocation, useNavigate, Navigate, useParams } from 'react-router-dom'
 import ACTIONS from '../Action'
 import toast from 'react-hot-toast';
 import Avatar from 'react-avatar';
+import IconChat from '../icons/IconChat';
+import IconUsers from '../icons/IconUsers';
 
 function meetRoom() {
 
@@ -36,7 +38,7 @@ function meetRoom() {
 
       // Emit JOIN to the server
       socketRef.current.emit(ACTIONS.JOIN, {
-        roomId : location.state?.roomId,
+        roomId: location.state?.roomId,
         username: location.state?.userName,
       });
 
@@ -74,7 +76,7 @@ function meetRoom() {
 
   }, []);
 
-  
+
 
 
   if (!location.state) {
@@ -90,7 +92,7 @@ function meetRoom() {
       };
 
       socketRef.current.emit(ACTIONS.CHAT_MESSAGE, {
-        roomId : location.state?.roomId, // Room ID
+        roomId: location.state?.roomId, // Room ID
         message, // The message content
       });
 
@@ -99,73 +101,101 @@ function meetRoom() {
   };
 
   const handleButtonClick = (buttonId) => {
-    setSelectedButton(buttonId === selectedButton ? null : buttonId);
+    setSelectedButton(buttonId);
   };
 
 
   return (
     <>
-      <div className='relative h-screen w-screen bg-slate-700 flex flex-row gap-1 p-1'>
-        <div className='basis-3/4 text-white p-1 '>
-          <div className='p-1'>
-            <div className="h-[86vh] w-full p-1 bg-gray-950 overflow-scroll">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-2 ">
-                {participants.map((participant) => {
-                  return (
-                    <div key={participant.socketId} className="relative w-full h-0 border" style={{ paddingTop: "56.25%" }}>
-                      {/* If video is on, show the video element else below avatar */}
-                      <div className="absolute top-0 left-0 w-full h-full transform scale-x-[1] object-cover">
-                        <Avatar name={participant.username} size="100%" />
-                      </div>
-                      <div className="absolute bottom-2 left-2 text-white">
-                        <span className="font-semibold text-lg">{participant.username}</span>
-                      </div>
+      <div className='relative h-full w-screen  bg-gray-900 flex flex-row gap-1 p-1'>
+        <div className='basis-3/4 text-white pl-1 '>
+          <div className="h-[92%] w-full p-2 bg-slate-700 overflow-y-auto rounded-xl shadow-lg">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-2 ">
+              {participants.map((participant, index) => {
+                return (
+                  <div
+                    key={participant.socketId}
+                    className={`relative w-full h-0 rounded-lg bg-gray-900 hover:scale-105 transform transition-transform duration-300 ease-in-out animate__animated animate__fadeIn animate__delay-${index}s shadow-md`}
+                    style={{ paddingTop: "56.25%" }} // Maintain aspect ratio
+                  >
+                    {/* Avatar Centered */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Avatar
+                        name={participant.username}
+                        size="90"
+                        round={true}
+                        className="shadow-lg"
+                      />
                     </div>
-                  );
-                })}
-              </div>
+
+                    {/* Username */}
+                    <div className="absolute bottom-1 left-1  px-2 py-1 rounded-lg">
+                      <span className="font-medium text-blue-200">
+                        {participant.username.trim()}
+                      </span>
+                    </div>
+                  </div>
+
+                );
+              })}
             </div>
           </div>
-          <div>
-            {<MeetVideoControls mystream={mystream} setMystream={setMystream} socketRef={socketRef} roomId={location.state?.roomId} reactNavigator={reactNavigator} />}
+          <div className="h-[8%] w-full flex justify-center items-center">
+            <MeetVideoControls
+              mystream={mystream}
+              setMystream={setMystream}
+              socketRef={socketRef}
+              roomId={location.state?.roomId}
+              reactNavigator={reactNavigator}
+            />
           </div>
 
         </div>
 
-        
-        <div className='basis-1/4 bg-gray-800'>
-          <div className="flex justify-center items-center p-2 m-1">
+
+        <div className='basis-1/4 bg-gray-900'>
+          <div className="flex px-2 mb-2 ">
+            {/* Chat Button */}
             <button
-              onClick={() => handleButtonClick('chat')}
-              className={`border border-black p-2 rounded-tl-lg rounded-bl-lg transition-all duration-300 ease-in-out ${selectedButton === 'chat' ? 'bg-blue-500 text-white' : 'bg-white text-black'
-                }`}
+              onClick={() => handleButtonClick("chat")}
+              className={`flex-1 flex justify-center items-center px-6 py-2 font-medium  transition-all duration-300 ease-in-out transform hover:scale-105 outline-none ${selectedButton === "chat"
+                ? "bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-md"
+                : "bg-gray-800 text-white "
+                } rounded-l-lg`}
             >
-              Chat
+              <IconChat />
             </button>
+
+            {/* Middle Separator */}
+            <div className="w-0.5 bg-gray-900"></div>
 
             {/* Participant Button */}
             <button
-              onClick={() => handleButtonClick('participant')}
-              className={`border border-black p-2 rounded-tr-lg rounded-br-lg transition-all duration-300 ease-in-out ${selectedButton === 'participant' ? 'bg-blue-500 text-white' : 'bg-white text-black'
-                }`}
+              onClick={() => handleButtonClick("participant")}
+              className={`flex-1 flex justify-center items-center px-6 py-2 font-medium transition-all duration-300 ease-in-out transform hover:scale-105 outline-none ${selectedButton === "participant"
+                ? "bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-md"
+                : "bg-gray-800 text-white "
+                } rounded-r-lg`}
             >
-              Participant
+              <IconUsers />
             </button>
           </div>
 
+
+
           {/* view for participants/chat */}
-          <div className='p-1 m-1'>
-            {selectedButton === 'chat' ? (
-              <ChatBox
-                messages={messages}
-                newMessage={newMessage}
-                setNewMessage={setNewMessage}
-                handleSendMessage={handleSendMessage}
-              />
-            ) : (
-              <Participant participants={participants} />
-            )}
-          </div>
+
+          {selectedButton === 'chat' ? (
+            <ChatBox
+              messages={messages}
+              newMessage={newMessage}
+              setNewMessage={setNewMessage}
+              handleSendMessage={handleSendMessage}
+            />
+          ) : (
+            <Participant participants={participants} />
+          )}
+
         </div>
       </div>
     </>

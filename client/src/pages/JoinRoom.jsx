@@ -74,7 +74,7 @@ function JoinRoom() {
                     {/* New Room Button */}
                     <button
                         onClick={newRoom}
-                        className="p-4 bg-blue-500 rounded-xl text-white text-lg font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-blue-600 animate__animated animate__fadeIn"
+                        className="p-4 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-xl text-white text-lg font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-blue-600 animate__animated animate__fadeIn"
                     >
                         New Room
                     </button>

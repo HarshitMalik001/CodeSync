@@ -7,7 +7,7 @@ const ACTIONS = {
     LEAVE: 'leave',               // When a user leaves the room
     CHAT_MESSAGE: 'chat-message', // For sending/receiving chat messages
     NEW_PARTICIPANT: 'new-participant', // Notify when a new participant joins
-
+            // ONMEDIACHANFE
 };
 
 export default ACTIONS;

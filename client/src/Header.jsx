@@ -52,7 +52,7 @@ const Header = () => {
                 <button className="flex items-center gap-4 transform transition-all duration-500 ease-in-out hover:scale-105 hover:bg-opacity-50 p-2 rounded-lg">
                     <h3 className="flex items-center gap-4 text-2xl font-bold animate__animated animate__fadeIn">
                         <img src={logo} alt="Logo" className="h-10 transition-all duration-300 ease-in-out transform hover:scale-110" />
-                        <span className="text-white transition-all duration-300 ease-in-out transform hover:text-gray-400">CodeMeet</span>
+                        <span className="bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent transition-all duration-300 ease-in-out transform hover:text-purple-400">CodeMeet</span>
                     </h3>
                 </button>
             </div>

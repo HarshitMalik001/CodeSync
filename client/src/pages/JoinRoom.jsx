@@ -27,7 +27,7 @@ function JoinRoom() {
 
         console.log("Joining room with RoomId:", roomId, "and Username:", userName);
         navigate(`/meet-room/${roomId}`, {
-            state: { userName },
+            state: { userName , roomId },
         });
     };
 

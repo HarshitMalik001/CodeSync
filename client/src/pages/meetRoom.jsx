@@ -12,7 +12,7 @@ function meetRoom() {
 
   const socketRef = useRef(null);
   const location = useLocation();
-  const { roomId } = useParams();
+  // const { roomId } = useParams();
   const reactNavigator = useNavigate();
 
   const [messages, setMessages] = useState([]);
@@ -36,7 +36,7 @@ function meetRoom() {
 
       // Emit JOIN to the server
       socketRef.current.emit(ACTIONS.JOIN, {
-        roomId,
+        roomId : location.state?.roomId,
         username: location.state?.userName,
       });
 
@@ -90,7 +90,7 @@ function meetRoom() {
       };
 
       socketRef.current.emit(ACTIONS.CHAT_MESSAGE, {
-        roomId, // Room ID
+        roomId : location.state?.roomId, // Room ID
         message, // The message content
       });
 
@@ -127,7 +127,7 @@ function meetRoom() {
             </div>
           </div>
           <div>
-            {<MeetVideoControls mystream={mystream} setMystream={setMystream} socketRef={socketRef} roomId={roomId} reactNavigator={reactNavigator} />}
+            {<MeetVideoControls mystream={mystream} setMystream={setMystream} socketRef={socketRef} roomId={location.state?.roomId} reactNavigator={reactNavigator} />}
           </div>
 
         </div>

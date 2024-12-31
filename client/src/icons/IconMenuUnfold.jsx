@@ -1,16 +1,24 @@
 import * as React from "react";
 
-function IconMenuUnfold(props) {
+function IconMenuUnfold({isMenuOpen,setIsMenuOpen}) {
   return (
-    <svg
-      viewBox="0 0 1024 1024"
-      fill="currentColor"
-      height="1em"
-      width="1em"
-      {...props}
+    <button
+      className={`flex flex-col justify-between items-center w-8 h-6 bg-transparent border-none p-0 cursor-pointer transition-all duration-300 ease-in-out ${isMenuOpen ? "rotate-45" : ""} animate__animated animate__fadeIn `}
+      onClick={() => setIsMenuOpen(!isMenuOpen)}
     >
-      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM142.4 642.1L298.7 519a8.84 8.84 0 000-13.9L142.4 381.9c-5.8-4.6-14.4-.5-14.4 6.9v246.3a8.9 8.9 0 0014.4 7z" />
-    </svg>
+      <div
+        className={`w-8 h-1 bg-orange-600 transition-all duration-300 ease-in-out ${isMenuOpen ? "transform rotate-45 translate-y-2" : ""
+          }`}
+      ></div>
+      <div
+        className={`w-8 h-1 bg-white transition-all duration-300 ease-in-out ${isMenuOpen ? "opacity-0" : ""
+          }`}
+      ></div>
+      <div
+        className={`w-8 h-1 bg-green-600 transition-all duration-300 ease-in-out ${isMenuOpen ? "transform -rotate-45 -translate-y-2" : ""
+          }`}
+      ></div>
+    </button>
   );
 }
 

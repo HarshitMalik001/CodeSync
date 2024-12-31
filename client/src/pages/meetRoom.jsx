@@ -32,7 +32,6 @@ function meetRoom() {
         console.log('socket error', e);
         toast.error('Socket connection failed, Try again later.');
         reactNavigator('/');
-
       }
 
       // Emit JOIN to the server
@@ -40,7 +39,6 @@ function meetRoom() {
         roomId,
         username: location.state?.userName,
       });
-
 
       // Listen for 'JOINED' event and update participants
       socketRef.current.on(ACTIONS.JOINED, ({ clients, username, socketId }) => {
@@ -75,6 +73,8 @@ function meetRoom() {
     };
 
   }, []);
+
+  
 
 
   if (!location.state) {
@@ -113,7 +113,7 @@ function meetRoom() {
                 {participants.map((participant) => {
                   return (
                     <div key={participant.socketId} className="relative w-full h-0 border" style={{ paddingTop: "56.25%" }}>
-                      {/* If video is on, show the video element */}
+                      {/* If video is on, show the video element else below avatar */}
                       <div className="absolute top-0 left-0 w-full h-full transform scale-x-[1] object-cover">
                         <Avatar name={participant.username} size="100%" />
                       </div>
@@ -131,6 +131,8 @@ function meetRoom() {
           </div>
 
         </div>
+
+        
         <div className='basis-1/4 bg-gray-800'>
           <div className="flex justify-center items-center p-2 m-1">
             <button
@@ -143,7 +145,7 @@ function meetRoom() {
 
             {/* Participant Button */}
             <button
-              onClick={() => handleButtonClick('xparticipant')}
+              onClick={() => handleButtonClick('participant')}
               className={`border border-black p-2 rounded-tr-lg rounded-br-lg transition-all duration-300 ease-in-out ${selectedButton === 'participant' ? 'bg-blue-500 text-white' : 'bg-white text-black'
                 }`}
             >

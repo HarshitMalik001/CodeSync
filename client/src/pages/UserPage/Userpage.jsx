@@ -1,28 +1,47 @@
 import React, { useState } from 'react';
 import Signup from '../../components/SignUp';
 import Login from '../../components/LogIn';
-export function User()
-{
-    const [flagSignup, setflagSignup] = useState(1);
 
-    function Register()
-    {
-        setflagSignup(0);
-    }
+export function User() {
+    const [flagSignup, setFlagSignup] = useState(1);
 
-    function Signin()
-    {
-        setflagSignup(1);
-    }
+    const Register = () => setFlagSignup(0);
+    const Signin = () => setFlagSignup(1);
 
     return (
-        <>
-            { (flagSignup == 0)?
-                <Signup Signin = {Signin}></Signup> :
-                <Login Register = {Register}></Login>
-            }
-        </>
-    )
+        <div className="flex items-center justify-center h-full bg-gray-900 ">
+            <div className="w-full h-full ">
+                <div className="flex justify-center gap-4">
+
+                    <button
+                        onClick={Register}
+                        className={`ml-4 px-4 py-2 text-lg font-semibold border-b-2 transition-all duration-300 ${flagSignup === 0
+                            ? 'text-blue-600 border-blue-600'
+                            : 'text-white border-transparent hover:text-blue-600 hover:border-blue-600'
+                            }`}
+                    >
+                        Sign Up
+                    </button>
+
+                    <button
+                        onClick={Signin}
+                        className={`px-4 py-2 text-lg font-semibold border-b-2 transition-all duration-300 ${flagSignup === 1
+                            ? 'text-blue-600 border-blue-600'
+                            : 'text-white border-transparent hover:text-blue-600 hover:border-blue-600'
+                            }`}
+                    >
+                        Sign In
+                    </button>
+                </div>
+
+                {flagSignup === 0 ? (
+                    <Signup Signin={Signin} />
+                ) : (
+                    <Login Register={Register} />
+                )}
+            </div>
+        </div>
+    );
 }
 
-export default User
+export default User;

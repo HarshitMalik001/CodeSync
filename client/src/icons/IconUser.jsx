@@ -1,19 +1,14 @@
 import * as React from "react";
-
-function IconUser(props) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      // height="2em"
-      // width="2em"
-      {...props}
-    >
-      <path d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-    </svg>
-  );
-}
-
-
-
+const IconUser = (props) => (
+  <svg
+    width="1.3em"
+    height="1.3em"
+    fill="currentColor"
+    viewBox="0 0 448 512"
+    {...props}
+  >
+    <path d="M224 256a128 128 0 1 0 0-256 128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3 0 498.7 13.3 512 29.7 512h388.6c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3h-91.4z" />
+  </svg>
+);
 export default IconUser;
+

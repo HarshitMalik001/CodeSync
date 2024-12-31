@@ -62,12 +62,12 @@ function Signup(props) {
   };
 
   return (
-    <section className="flex items-center justify-center bg-gray-900 text-gray-300 mt-20 animate__animated animate__fadeIn">
-      <div className="w-full max-w-sm lg:max-w-2xl md:max-w-xl bg-gray-800 p-8 rounded-lg shadow-lg transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl">
+    <section className="flex items-center justify-center bg-gray-900 text-gray-300 mt-14 animate__animated animate__fadeIn">
+      <div className="w-full max-w-sm lg:max-w-2xl md:max-w-xl bg-gray-800 py-6 px-8 rounded-lg shadow-lg transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl">
         <h2 className="text-2xl font-bold text-gray-100 text-center mb-6">
           Create Your Account
         </h2>
-        <form onSubmit={signupSubmitHandler} className="space-y-6">
+        <form onSubmit={signupSubmitHandler} className="space-y-3">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
             <div>
               <label
@@ -150,14 +150,14 @@ function Signup(props) {
               />
             </div>
           </div>
-          <div className="flex items-start mt-4">
+          <div className="flex items-start mt-3">
             <input
               type="checkbox"
               id="terms"
               className="w-4 h-4 border-gray-600 bg-gray-700 rounded"
               required
             />
-            <label htmlFor="terms" className="ml-2 text-sm">
+            <label htmlFor="terms" className="ml-1 text-sm">
               I agree to the{" "}
               <a href="#" className="text-blue-400 hover:underline">
                 Terms and Conditions
@@ -166,12 +166,12 @@ function Signup(props) {
           </div>
           <button
             type="submit"
-            className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none transform duration-500 ease-in-out transition-all hover:scale-105"
+            className="w-full py-2 bg-blue-600 mt-1 text-white rounded-lg hover:bg-blue-700 focus:outline-none transform duration-500 ease-in-out transition-all hover:scale-105"
           >
             Sign Up
           </button>
         </form>
-        <div className="text-sm text-center mt-6">
+        <div className="text-sm text-center mt-3">
           Already have an account?{" "}
           <button
             onClick={props.Signin}

@@ -18,7 +18,7 @@ function ChatBox({ messages, newMessage, setNewMessage, handleSendMessage }) {
   return (
     <div className=" p-2 bg-gray-900 rounded-lg shadow-lg">
       {/* Messages List */}
-      <div className="space-y-2 h-[75vh] overflow-y-auto rounded-xl p-2  animate__animated animate__fadeIn animate__faster">
+      <div className="space-y-2 h-[75vh] overflow-y-auto roundd-xl p-2  animate__animated animate__fadeIn animate__faster">
         {messages.map((message, index) => (
           <div
             key={index}

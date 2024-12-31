@@ -8,6 +8,6 @@ export const initSocket = async () => {
         transports: ['websocket'],
     };
 
-    const backendURL =  'http://localhost:5000'; // Updated to use environment variable
+    const backendURL =import.meta.env.VITE_API_URL; // Updated to use environment variable
     return io(backendURL, options);
 };

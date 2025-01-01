@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import codeSnippets from "../../components/codeSnippets";
+import codeSnippets from "../../components/codeSnippets/index";
 import ACTIONS from "../../Action";
 
 // Function to create a submission

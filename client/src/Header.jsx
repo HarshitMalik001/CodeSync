@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import logo from './images/logo.png';
-import IconHome from './icons/IconHome';
-import IconCreate from './icons/IconCreate';
-import IconMenuUnfold from './icons/IconMenuUnFold';
-import IconUser from './icons/IconUser';
-import IconLogout from './icons/IconLogout';
-import { isUserLoggedIn, logout } from './utils/helper';
+import IconMenuUnfold from './icons/IconMenuUnfold.jsx';
+import IconUser from './icons/IconUser.jsx';
+import IconLogout from './icons/IconLogout.jsx';
+import { isUserLoggedIn, logout } from './utils/helper.jsx';
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import IconLogin from "./icons/IconLogin";
 
 const logoutAPI = async () => {
     try {

@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
-import Participant from '../components/MeetParticipant/Participant';
-import ChatBox from '../components/MeetChatbox/ChatBox';
-import MeetVideoControls from '../components/MeetVideo/MeetVideoControls';
+import Participant from '../components/MeetParticipant/Participant.jsx';
+import ChatBox from '../components/MeetChatbox/ChatBox.jsx';
+import MeetVideoControls from '../components/MeetVideo/MeetVideoControls.jsx';
 import { initSocket } from '../socket';
 import { useLocation, useNavigate, Navigate, useParams } from 'react-router-dom';
-import ACTIONS from '../Action'
+import ACTIONS from '../Action.js'
 import toast from 'react-hot-toast';
 import Avatar from 'react-avatar';
-import IconChat from '../icons/IconChat';
-import IconUsers from '../icons/IconUsers';
+import IconChat from '../icons/IconChat.jsx';
+import IconUsers from '../icons/IconUsers.jsx';
 
 function meetRoom() {
 

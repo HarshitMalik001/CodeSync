@@ -7,9 +7,7 @@ import { Server } from "socket.io";
 import ACTIONS from "./src/Action.js";
 import { log } from "console";
 
-dotenv.config({
-    path: './.env'
-})
+dotenv.config();
 
 const server = http.createServer(app);
 const io = new Server(server);

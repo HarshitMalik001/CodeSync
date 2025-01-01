@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
-import connectDB from "./db/index.js";
+import connectDB from "./src/db/index.js";
 import dotenv from "dotenv";
-import app from "./app.js";
+import app from "./src/app.js";
 import http from "http";
 import { Server } from "socket.io";
-import ACTIONS from "./Action.js";
+import ACTIONS from "./src/Action.js";
 import { log } from "console";
 
 dotenv.config({
@@ -84,9 +84,8 @@ connectDB()
         });
 
 
-        const port = process.env.PORT || 5000;
-        server.listen(port, () => {
-            console.log(`Server is listening on http://localhost:${port}`);
+        server.listen(5000, () => {
+            console.log(`Server is listening on http://localhost:${5000}`);
         });
     })
     .catch(() => {

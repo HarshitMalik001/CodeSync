@@ -104,10 +104,10 @@ const CompilerPage = ({ socketRef, roomId, onCodeChange }) => {
       const end = e.target.selectionEnd;
 
       // Insert 4 spaces
-      // setCode(
-      //   (prevCode) =>
-      //     prevCode.substring(0, start) + "    " + prevCode.substring(end)
-      // );
+      setCode(
+        (prevCode) =>
+          prevCode.substring(0, start) + "    " + prevCode.substring(end)
+      );
       // Move the cursor
       setTimeout(() => {
         e.target.selectionStart = e.target.selectionEnd = start + 4;
@@ -177,7 +177,7 @@ const CompilerPage = ({ socketRef, roomId, onCodeChange }) => {
 
   return (
 
-    <div className="absolute top-10 left-28 rounded-xl flex h-[80vh] w-[80vw] bg-gray-900 text-white">
+    <div className="absolute animate__animated animate__fadeIn animate__faster  z-50 top-10 left-28 rounded-xl flex h-[80vh] w-[80vw] bg-gray-900 text-white">
 
       {/* Left Section: Code Editor */}
 

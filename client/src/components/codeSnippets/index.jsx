@@ -1,35 +1,39 @@
 const codeSnippets = {
-    javascript: `function greet() {
-      console.log("Hello, world!");
-    }
+  javascript: 
+`function greet() {
+  console.log("Hello, world!");
+}
+
+greet();`,
   
-    greet();`,
-    
-    python: `def greet():
-      print("Hello, world!")
+  python: 
+`def greet():
+  print("Hello, world!")
+
+greet()`,
   
-  greet()`,
-    
-    java: `public class Main {
-      public static void main(String[] args) {
-        System.out.println("Hello, world!");
-      }
-    }`,
-    
-    c: `#include <stdio.h>
+  java: 
+`public class Main {
+  public static void main(String[] args) {
+      System.out.println("Hello, world!");
+  }
+}`,
   
-  int main() {
-      printf("Hello, world!\\n");
-      return 0;
-  }`,
-    
-    cpp: `#include <iostream>
+  c: 
+`#include <stdio.h>
+
+int main() {
+  printf("Hello, world!\\n");
+  return 0;
+}`,
   
-  int main() {
-      std::cout << "Hello, world!" << std::endl;
-      return 0;
-  }`
-  };
-  
-  export default codeSnippets;
-  
+  cpp: 
+`#include <iostream>
+
+int main() {
+  std::cout << "Hello, world!" << std::endl;
+  return 0;
+}`
+};
+
+export default codeSnippets;

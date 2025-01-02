@@ -5,7 +5,7 @@ import Avatar from 'react-avatar';
 function Participant({ participants }) {
 
   return (
-    <div className="h-[80vh] overflow-y-auto rounded-xl m-2 mt-4 pb-2">
+    <div className="h-[70vh] overflow-y-auto rounded-xl m-2 mt-4 pb-2">
    
       {participants.map((user, index) => (
         <div

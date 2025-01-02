@@ -18,12 +18,12 @@ function ChatBox({ messages, newMessage, setNewMessage, handleSendMessage }) {
   return (
     <div className=" p-2 bg-gray-900 rounded-lg shadow-lg">
       {/* Messages List */}
-      <div className="space-y-2 h-[75vh] overflow-y-auto roundd-xl p-2  animate__animated animate__fadeIn animate__faster">
+      <div className="space-y-2 h-[70vh] overflow-y-auto roundd-xl p-2  animate__animated animate__fadeIn animate__faster">
         {messages.map((message, index) => (
           <div
             key={index}
             className="flex items-start justify-between space-x-4  bg-gradient-to-r from-slate-700 to-gray-800  p-4 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 animate__animated animate__fadeInUp"
-          >
+          >  
             {/* User Info */}
             <div className="flex-1">
               <p className="text-blue-200 font-bold text-lg">{message.username}</p>

@@ -49,9 +49,9 @@ function Login(props) {
   return (
     <section className="flex items-center justify-center bg-slate-900 px-4 text-gray-300 mt-14 ">
       <div className="w-full max-w-md bg-gray-800 p-6 rounded-lg transform hover:scale-105 duration-500 ease-in-out transition-transform animate__animated animate__fadeIn">
-        <h2 className="text-2xl font-semibold text-center text-gray-100 mb-6">
+        {/* <h2 className="text-2xl font-semibold text-center text-gray-100 mb-6">
           Login to CodeSync
-        </h2>
+        </h2> */}
         <form className="space-y-4" onSubmit={loginSubmitHandler}>
           <div>
             <label

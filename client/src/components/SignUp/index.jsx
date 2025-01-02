@@ -63,10 +63,10 @@ function Signup(props) {
 
   return (
     <section className="flex items-center justify-center bg-gray-900 text-gray-300 mt-14 animate__animated animate__fadeIn">
-      <div className="w-full max-w-sm lg:max-w-2xl md:max-w-xl bg-gray-800 py-6 px-8 rounded-lg shadow-lg transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl">
-        <h2 className="text-2xl font-bold text-gray-100 text-center mb-6">
+      <div className="w-full max-w-sm lg:max-w-2xl md:max-w-xl bg-gray-800 py-4 px-8 rounded-lg shadow-lg transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl">
+        {/* <h2 className="text-2xl font-bold text-gray-100 text-center mb-6">
           Create Your Account
-        </h2>
+        </h2> */}
         <form onSubmit={signupSubmitHandler} className="space-y-3">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
             <div>
